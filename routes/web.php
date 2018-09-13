@@ -1,9 +1,10 @@
 <?php
 
+Route::get('/', 'IndexController@welcome');
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Auth::routes();
 
