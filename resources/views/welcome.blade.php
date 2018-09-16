@@ -78,11 +78,14 @@
               <div class="team-player">
                 <div class="card card-plain">
                   <div class="col-md-6 ml-auto mr-auto">
-                    <img src="{{ $product->images()->first()->image }}" alt="Thumbnail Image" class="img-raised rounded-circle img-fluid">
+                 
+                   <img src="{{ $product->images()->first() ? $product->images()->first()->image : ''  }}" alt="Thumbnail Image" class="img-raised rounded-circle img-fluid">
+
+                   <!-- $product->images()->first()->image  -->
                   </div>
                   <h4 class="card-title">{{ $product->name }}
                     <br>
-                    <small class="card-description text-muted">{{ $product->category->name }}</small>
+                    <small class="card-description text-muted">{{ $product->category ? $product->category->name : 'Generico'}}</small>
                   </h4>
                   <div class="card-body">
                     <p class="card-description"> {{ $product->description }}
@@ -138,21 +141,5 @@
     </div>
   </div>
 
-
- <footer class="footer">
-      <div class="container">
-        <nav class="float-left">
-          
-        </nav>
-        <div class="copyright float-right">
-          &copy;
-          <script>
-            document.write(new Date().getFullYear())
-          </script>, realizado por  Luis V
-        </div>
-      </div>
-    </footer>
-
-
-
+@include('includes.footer')
 @endsection

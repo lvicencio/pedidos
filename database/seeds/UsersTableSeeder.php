@@ -15,7 +15,8 @@ class UsersTableSeeder extends Seeder
         User::create([
         	'name' 	=> 'Luis',
         	'email'	=> 'luis@gmail.com',
-        	'password' => bcrypt('luis123')
+        	'password' => bcrypt('luis123'),
+            'admin' => true
         ]);
     }
 }

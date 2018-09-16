@@ -6,7 +6,7 @@
 @section('content')
 
 
-  <div class="main main-raised">
+  <div class="main main-raised" style="margin-top: 1em">
     <div class="container">
       
 
@@ -40,16 +40,19 @@
                     <td>{{ $product->category ? $product->category->name : 'Generico'}}</td>
                     <td>&dollar;{{ $product->price }}</td>
                     <td class="td-actions text-right">
-                      <button type="button" rel="tooltip" title="Ver Producto" class="btn btn-info btn-simple btn-sm" >
+                      <form method="post" action="{{ url('/admin/products/'.$product->id.'/delete') }}">
+                         {{ csrf_field() }}
+                      <a href=""type="button" rel="tooltip" title="Ver Producto" class="btn btn-info btn-simple btn-sm" >
                         <i class="fa fa-info"></i>
-                      </button>
-                      <button type="button" rel="tooltip" title="Editar" class="btn btn-success btn-simple btn-sm" >
+                      </a> 
+                      <a href="{{ url('/admin/products/'.$product->id.'/edit') }}" rel="tooltip" title="Editar" class="btn btn-success btn-simple btn-sm" >
                         <i class="fa fa-edit"></i>
-                      </button>
-                      <button type="button" rel="tooltip" title="Eliminar" class="btn btn-danger btn-simple btn-sm" >
-                        <i class="fa fa-times"></i>
-                      </button>
-
+                      </a>
+                      
+                        <button type="submit" rel="tooltip" title="Eliminar" class="btn btn-danger btn-simple btn-sm" >
+                          <i class="fa fa-times"></i>
+                        </button>
+                      </form>
                     </td>
                   </tr>
                   @endforeach
@@ -68,21 +71,5 @@
     </div>
   </div>
 
-
- <footer class="footer">
-      <div class="container">
-        <nav class="float-left">
-          
-        </nav>
-        <div class="copyright float-right">
-          &copy;
-          <script>
-            document.write(new Date().getFullYear())
-          </script>, realizado por  Luis V
-        </div>
-      </div>
-    </footer>
-
-
-
+@include('includes.footer')
 @endsection

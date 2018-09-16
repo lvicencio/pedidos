@@ -43,10 +43,13 @@
 
         
            <li class="dropdown nav-item">
-            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown"  role="button" aria-expanded="false" aria-haspopup="true" v-pre>
+              <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown"  role="button" aria-expanded="false" aria-haspopup="true" v-pre>
               {{ Auth::user()->name }} <span class="caret"></span>
-            </a>
+               </a>
             <div class="dropdown-menu dropdown-with-icons">
+              @if(auth()->user()->admin == true)
+              <a href="{{ url('/admin/products') }}" class="dropdown-toggle nav-link" >Admin Productos</a>
+              @endif
               <a href="{{ route('logout') }}"
                         onclick="event.preventDefault();
                                  document.getElementById('logout-form').submit();"  class="dropdown-toggle nav-link" data-toggle="dropdown" class="dropdown-item">
