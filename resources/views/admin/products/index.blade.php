@@ -15,7 +15,7 @@
         <div class="team">
           <div class="row">
 
-            <div class="mx-auto" style="width: 200px;">
+            <div class="mx-auto" style="width: 100px;">
              <a href="{{ url('/admin/products/create') }}" class="btn btn-info btn-round">Nuevo Producto</a>
         </div>
             
@@ -24,7 +24,7 @@
                 <thead>
                   <tr>
                     <th>#</th>
-                    <th>Nombre</th>
+                    <th class="col-md-2">Nombre</th>
                     <th class="col-md-4" scope="col">Descripción</th>
                     <th>Categoria</th>
                     <th class="text-right">Precio</th>
@@ -48,7 +48,9 @@
                       <a href="{{ url('/admin/products/'.$product->id.'/edit') }}" rel="tooltip" title="Editar" class="btn btn-success btn-simple btn-sm" >
                         <i class="fa fa-edit"></i>
                       </a>
-                      
+                      <a href="{{ url('/admin/products/'.$product->id.'/images') }}" type="button" rel="tooltip" title="Imagenes" class="btn btn-warning btn-simple btn-sm" >
+                        <i class="fa fa-image"></i>
+                      </a> 
                         <button type="submit" rel="tooltip" title="Eliminar" class="btn btn-danger btn-simple btn-sm" >
                           <i class="fa fa-times"></i>
                         </button>
@@ -60,9 +62,11 @@
               </table>
 
 
-              <div align="center">
-                {{ $products->links() }}
+              <div class="section text-center">
+                {{$products->links("pagination::bootstrap-4")}} 
               </div>
+
+              
           </div>
         </div>
       </div>

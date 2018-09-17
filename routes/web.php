@@ -18,6 +18,10 @@ Route::middleware(['auth','admin'])->group(function ()
 		Route::get('/admin/products/{id}/edit','ProductController@edit');
 		Route::post('/admin/products/{id}/edit','ProductController@update');
 		Route::post('/admin/products/{id}/delete','ProductController@destroy');
+		//imagenes
+		Route::get('/admin/products/{id}/images','ImageController@index');
+		Route::post('/admin/products/{id}/images','ImageController@store');
+		Route::delete('/admin/products/{id}/images','ImageController@destroy');
 });
 
 
