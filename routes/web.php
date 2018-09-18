@@ -22,7 +22,9 @@ Route::middleware(['auth','admin'])->group(function ()
 		Route::get('/admin/products/{id}/images','ImageController@index');
 		Route::post('/admin/products/{id}/images','ImageController@store');
 		Route::delete('/admin/products/{id}/images','ImageController@destroy');
+		Route::get('/admin/products/{id}/images/featured/{image}','ImageController@featured');
 });
+
 
 
 

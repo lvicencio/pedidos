@@ -9,16 +9,26 @@ use File;
 
 class ImageController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   
+
+    public function featured($id, $image)
+    {
+        
+        ProductImage::where('product_id', $id)->update([
+            'featured' => false
+        ]);
+        $productImage = ProductImage::findOrFail($image);
+        $productImage->featured = true;
+        $productImage->save();
+
+        return back();
+    }
+
     public function index($id)
     {
         
         $product = Product::findOrFail($id);
-        $images = $product->images;
+        $images = $product->images()->orderBy('featured', 'desc')->get();
 
         return view("admin.products.images.index")->with(compact('product','images'));
     }
