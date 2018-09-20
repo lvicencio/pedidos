@@ -17,7 +17,7 @@ class CreateCarritoDetallesTable extends Migration
             $table->increments('id');
 
             $table->integer('quantity');
-            $table->integer('discount');
+            $table->integer('discount')->default(0);
 
             $table->integer('carrito_id')->unsigned();
             $table->foreign('carrito_id')->references('id')->on('carritos');

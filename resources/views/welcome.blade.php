@@ -67,41 +67,47 @@
 
       <div class="section text-center">
         <h2 class="title">Listado de Productos</h2>
-        <div class="team">
+       
           <div class="row">
 
           
 
             @foreach ($products as $product)
               
-              <div class="col-md-4">
-              <div class="team-player">
-                <div class="card card-plain">
-                  <div class="col-md-6 ml-auto mr-auto">
+              <div class="card col-md-4 mx-auto" >
+             
+                <div class="card card-plain ">
+                  <div class="col-md-8 ml-auto mr-auto">
                  <!-- {{ $product->images()->first() ? $product->images()->first()->image : ''  }}-->
                    <img src="{{ $product->featured_image_url }}" alt="Thumbnail Image" class="img-raised rounded-circle img-fluid">
 
                    <!-- $product->images()->first()->image  -->
                   </div>
-                  <h4 class="card-title">{{ $product->name }}
+                  <h4 class="card-title"> <a href="{{ url('/products/'.$product->id) }}">{{ $product->name }}</a> 
                     <br>
                     <small class="card-description text-muted">{{ $product->category ? $product->category->name : 'Generico'}}</small>
                   </h4>
                   <div class="card-body">
                     <p class="card-description"> {{ $product->description }}
                   </div>
-                  <div class="card-footer justify-content-center">
+                  <!--<div class="card-footer justify-content-center">
                     <a href="#pablo" class="btn btn-link btn-just-icon"><i class="fa fa-twitter"></i></a>
                     <a href="#pablo" class="btn btn-link btn-just-icon"><i class="fa fa-instagram"></i></a>
                     <a href="#pablo" class="btn btn-link btn-just-icon"><i class="fa fa-facebook-square"></i></a>
-                  </div>
+                  </div> -->
                 </div>
-              </div>
+              
               </div>
 
             @endforeach
+
+            <div class="text-center">
+                {{$products->links("pagination::bootstrap-4")}} 
+              </div>
           </div>
-        </div>
+
+
+      
       </div>
       <div class="section section-contacts">
         <div class="row">

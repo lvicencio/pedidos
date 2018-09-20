@@ -10,7 +10,7 @@ class IndexController extends Controller
     //
     public function welcome()
     {
-    	$products = Product::all();
+    	$products = Product::paginate(9);
     	return view('welcome')->with(compact('products'));
     }
 }

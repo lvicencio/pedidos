@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Product;
+use App\CarritoDetalle;
 
-class ProductController extends Controller
+class CarritoDetalleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::paginate(10);
-
-        return view('admin.products.index')->with(compact('products'));
+        //
     }
 
     /**
@@ -26,7 +24,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('admin.products.create');
+        //
     }
 
     /**
@@ -37,15 +35,14 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        
-        $product = new Product();
-        $product->name = $request->input('name');
-        $product->description = $request->input('description');
-        $product->price = $request->input('price');
-        $product->long_description = $request->input('long_description');
-        $product->save();
+        $carroDetalle = new CarritoDetalle();
+        $carroDetalle->carrito_id   =   auth()->user()->carrito_id;
+        $carroDetalle->product_id   =   $request->product_id;
+        $carroDetalle->quantity     =   $request->quantity;
 
-        return redirect('/admin/products');
+        $carroDetalle->save();
+
+        return back();
     }
 
     /**
@@ -56,10 +53,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $product = Product::findOrFail($id);
-        $images = $product->images()->get();
-
-        return view("admin.products.show")->with(compact('product','images'));
+        //
     }
 
     /**
@@ -70,8 +64,7 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $product = Product::findOrFail($id);
-        return view('admin.products.edit')->with(compact('product'));
+        //
     }
 
     /**
@@ -83,14 +76,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $product = Product::findOrFail($id);
-        $product->name = $request->input('name');
-        $product->description = $request->input('description');
-        $product->price = $request->input('price');
-        $product->long_description = $request->input('long_description');
-        $product->save();
-
-        return redirect('/admin/products');
+        //
     }
 
     /**
@@ -101,9 +87,6 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        $product = Product::findOrFail($id);
-        $product->delete();
-
-        return back();
+        //
     }
 }

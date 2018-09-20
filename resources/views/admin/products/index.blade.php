@@ -42,7 +42,7 @@
                     <td class="td-actions text-right">
                       <form method="post" action="{{ url('/admin/products/'.$product->id.'/delete') }}">
                          {{ csrf_field() }}
-                      <a href=""type="button" rel="tooltip" title="Ver Producto" class="btn btn-info btn-simple btn-sm" >
+                      <a href="{{ url('/products/'.$product->id) }}"type="button" rel="tooltip" title="Ver Producto" class="btn btn-info btn-simple btn-sm" >
                         <i class="fa fa-info"></i>
                       </a> 
                       <a href="{{ url('/admin/products/'.$product->id.'/edit') }}" rel="tooltip" title="Editar" class="btn btn-success btn-simple btn-sm" >

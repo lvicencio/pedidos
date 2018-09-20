@@ -9,6 +9,10 @@ Route::get('/', 'IndexController@welcome');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/products/{id}','ProductController@show'); //ver producto
+
+Route::post('/carrito', 'CarritoDetalleController@store');
+
 
 Route::middleware(['auth','admin'])->group(function ()
 {
