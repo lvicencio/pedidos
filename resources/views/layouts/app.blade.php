@@ -47,6 +47,7 @@
               {{ Auth::user()->name }} <span class="caret"></span>
                </a>
             <div class="dropdown-menu dropdown-with-icons">
+              <a href="{{ url('/home') }}" class="dropdown-toggle nav-link" >Dashboard</a>
               @if(auth()->user()->admin == true)
               <a href="{{ url('/admin/products') }}" class="dropdown-toggle nav-link" >Admin Productos</a>
               @endif

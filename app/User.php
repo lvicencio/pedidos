@@ -36,12 +36,12 @@ class User extends Authenticatable
 
 
 //accesador para carrito_id
-    public function getCarritoIdAttribute()
+    public function getCarritoAttribute()
     {
         $carrito =  $this->carritos()->where('status', 'Active')->first();
 
         if ($carrito) {
-            return $carrito->id;
+            return $carrito;
         }
 
         $carrito = new Carrito();
@@ -50,7 +50,7 @@ class User extends Authenticatable
 
         $carrito->save();
 
-        return $carrito->id;
+        return $carrito;
 
 
     }

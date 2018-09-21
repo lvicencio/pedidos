@@ -36,7 +36,7 @@ class CarritoDetalleController extends Controller
     public function store(Request $request)
     {
         $carroDetalle = new CarritoDetalle();
-        $carroDetalle->carrito_id   =   auth()->user()->carrito_id;
+        $carroDetalle->carrito_id   =   auth()->user()->carrito->id;
         $carroDetalle->product_id   =   $request->product_id;
         $carroDetalle->quantity     =   $request->quantity;
 
@@ -85,8 +85,16 @@ class CarritoDetalleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $carroDetalle = CarritoDetalle::findOrFail($request->input('carrito_detail_id'));
+        
+        //verifica si el carrito id es igual al del usuario logeado
+        if ($carroDetalle->carrito_id ==  auth()->user()->carrito->id) {
+            $carroDetalle->delete();
+        }
+        
+
+        return back();
     }
 }
