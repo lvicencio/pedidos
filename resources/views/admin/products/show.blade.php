@@ -17,7 +17,12 @@
 
         <h2 class="title">Información del Producto {{ $product->name }}</h2>
         <hr>
-      
+       @if (session('notification'))
+                <div class="alert alert-success">
+                     {{ session('notification') }} <br>
+                     <a href="{{ url('/') }}" ><span>Volver a Productos</span></a>
+                </div>
+      @endif 
        
        <div class="row">
        

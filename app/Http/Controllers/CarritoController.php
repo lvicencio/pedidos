@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\CarritoDetalle;
 
-class CarritoDetalleController extends Controller
+class CarritoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -35,15 +34,7 @@ class CarritoDetalleController extends Controller
      */
     public function store(Request $request)
     {
-        $carroDetalle = new CarritoDetalle();
-        $carroDetalle->carrito_id   =   auth()->user()->carrito->id;
-        $carroDetalle->product_id   =   $request->product_id;
-        $carroDetalle->quantity     =   $request->quantity;
-
-        $carroDetalle->save();
-
-        $notification = 'El Producto se agrego correctamente al Carro de Compra';
-        return back()->with(compact('notification'));
+        //
     }
 
     /**
@@ -75,9 +66,15 @@ class CarritoDetalleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update()
     {
-        //
+        $carrito = auth()->user()->carrito;
+        $carrito->status = 'Pending';
+
+        $carrito->save();
+
+        $noti = 'Tu Pedido se ha registrado';
+        return back()->with(compact('noti'));
     }
 
     /**
@@ -86,17 +83,8 @@ class CarritoDetalleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy($id)
     {
-        $carroDetalle = CarritoDetalle::findOrFail($request->input('carrito_detail_id'));
-        
-        //verifica si el carrito id es igual al del usuario logeado
-        if ($carroDetalle->carrito_id ==  auth()->user()->carrito->id) {
-            $carroDetalle->delete();
-        }
-        
-        $notification = 'El producto fue eliminado del Carro de Compra';
-
-        return back()->with(compact('notification'));
+        //
     }
 }

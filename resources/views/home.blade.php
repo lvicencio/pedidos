@@ -15,12 +15,16 @@
 
       <div class="section text-center">
         <h2>Dashboard</h2>
-             @if (session('status'))
-                <div class="alert alert-success">
-                     {{ session('status') }}
+             @if (session('notification'))
+                <div class="alert alert-danger">
+                     {{ session('notification') }}
                 </div>
-             @endif
-                    Usted esta logeado!     
+             @endif 
+             @if (session('noti'))
+                <div class="alert alert-success">
+                     {{ session('noti') }}
+                </div>
+             @endif                     
       </div>
           <ul class="nav nav-pills nav-pills-icons nav-pills-info" role="tablist">
             <!--
@@ -83,7 +87,14 @@
                   @endforeach
                 </tbody>
               </table>
-
+              <div class="text-center">
+                <form method="post" action="{{ url('/order') }}">
+                  {{ csrf_field() }}
+                    <button class="btn btn-info btn-round">
+                      <i class="material-icons">done</i> Realizar Pedido
+                    </button>
+                  </form>
+              </div>
 <br>
     </div>
   </div>
