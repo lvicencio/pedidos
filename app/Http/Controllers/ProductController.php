@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Product;
+use App\Category;
 
 class ProductController extends Controller
 {
@@ -26,7 +27,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('admin.products.create');
+        $categories = Category::orderBy('name')->get();
+        return view('admin.products.create')->with(compact('categories'));
     }
 
     /**
@@ -38,11 +40,28 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         
+        $messages   = [
+             'name.required'        => 'Nombre es requerido',
+             'name.min'             => 'Nombre minimo 3 caracteres',
+             'description.required' => 'Descripción es obligatorio',
+             'description.max'      => 'Descripción tiene un maximo de 200 caracteres',
+             'price.required'       => 'Precio del producto es obligatorio',
+             'price.numeric'        => 'Precio NO valido',
+             'price.min'            => 'El Precio debe ser positivo'
+        ];
+        $rules      = [
+            'name'          => 'required|min:3',
+            'description'   => 'required|max:200',
+            'price'         => 'required|numeric|min:0'
+        ];
+        $this->validate($request, $rules, $messages);
+        
         $product = new Product();
         $product->name = $request->input('name');
         $product->description = $request->input('description');
         $product->price = $request->input('price');
         $product->long_description = $request->input('long_description');
+        $product->category_id = $request->input('category_id');
         $product->save();
 
         return redirect('/admin/products');
@@ -71,7 +90,8 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product = Product::findOrFail($id);
-        return view('admin.products.edit')->with(compact('product'));
+        $categories = Category::orderBy('name')->get();
+        return view('admin.products.edit')->with(compact('product','categories'));
     }
 
     /**
@@ -83,11 +103,29 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        $messages   = [
+             'name.required'        => 'Nombre es requerido',
+             'name.min'             => 'Nombre minimo 3 caracteres',
+             'description.required' => 'Descripción es obligatorio',
+             'description.max'      => 'Descripción tiene un maximo de 200 caracteres',
+             'price.required'       => 'Precio del producto es obligatorio',
+             'price.numeric'        => 'Precio NO valido',
+             'price.min'            => 'El Precio debe ser positivo'
+        ];
+        $rules      = [
+            'name'          => 'required|min:3',
+            'description'   => 'required|max:200',
+            'price'         => 'required|numeric|min:0'
+        ];
+        $this->validate($request, $rules, $messages);
+
         $product = Product::findOrFail($id);
         $product->name = $request->input('name');
         $product->description = $request->input('description');
         $product->price = $request->input('price');
         $product->long_description = $request->input('long_description');
+        $product->category_id = $request->input('category_id');
         $product->save();
 
         return redirect('/admin/products');
