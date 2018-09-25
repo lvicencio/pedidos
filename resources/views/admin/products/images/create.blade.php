@@ -35,7 +35,7 @@
             
             <div class="form-group col-md-6">
               <label for="inputPassword4">Precio</label>
-              <input type="number" class="form-control" name="price" placeholder="Password">
+              <input type="number" class="form-control" name="price" placeholder="Precio">
             </div>
        
             <div class="form-group col-md-6">

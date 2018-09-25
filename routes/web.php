@@ -29,6 +29,16 @@ Route::middleware(['auth','admin'])->group(function ()
 		Route::post('/admin/products/{id}/images','ImageController@store');
 		Route::delete('/admin/products/{id}/images','ImageController@destroy');
 		Route::get('/admin/products/{id}/images/featured/{image}','ImageController@featured');
+		//categorias
+		Route::get('/admin/categories','CategoryController@index');
+		Route::get('/admin/categories/create','CategoryController@create');
+		Route::post('/admin/categories','CategoryController@store');
+		Route::get('/admin/categories/{id}/edit','CategoryController@edit');
+		Route::get('/admin/categories/{id}/','CategoryController@show');
+		Route::post('/admin/categories/{id}/edit','CategoryController@update');
+		Route::post('/admin/categories/{id}/delete','CategoryController@destroy');
+
+
 });
 
 
