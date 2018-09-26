@@ -10,11 +10,14 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/products/{id}','ProductController@show'); //ver producto
+Route::get('/search','ProductController@search');
 
 Route::post('/carrito', 'CarritoDetalleController@store');
 Route::delete('/carrito', 'CarritoDetalleController@destroy');
 
 Route::post('/order', 'CarritoController@update');
+
+Route::get('/categories/{category}/','CategoryController@ver');
 
 Route::middleware(['auth','admin'])->group(function ()
 {

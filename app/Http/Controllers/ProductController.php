@@ -13,6 +13,14 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+     public function search(Request $request)
+    {
+        $busqueda   =   $request->input('busqueda');
+        $products = Product::where('name', 'like', "%$busqueda%")->paginate(9);
+
+        return view('admin.products.search')->with(compact('products', 'busqueda'));
+    }
+
     public function index()
     {
         $products = Product::paginate(10);

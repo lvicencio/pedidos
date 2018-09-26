@@ -8,9 +8,17 @@ use App\Category;
 class CategoryController extends Controller
 {
     
+
+    public function ver(Category $category)
+    {
+       // $category = Category::findOrFail($id);
+        $products = $category->products()->paginate(9);
+        return view("categories.ver")->with(compact('category','products'));
+    }
+
     public function index()
     {
-        $categories = Category::paginate(10);
+        $categories = Category::paginate(9);
 
         return view('admin.categories.index')->with(compact('categories'));
     }

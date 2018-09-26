@@ -29,81 +29,48 @@
           <div class="col-md-8 ml-auto mr-auto">
             <h2 class="title">Productos a tu domicilio</h2>
             <h5 class="description">Recibe tus productos en la comodidad de tu hogar, con calidad y los mejores precios.</h5>
+            <hr>
           </div>
         </div>
-        <div class="features">
-          <div class="row">
-            <div class="col-md-4">
-              <div class="info">
-                <div class="icon icon-info">
-                  <i class="material-icons">chat</i>
-                </div>
-                <h4 class="info-title">Atención Garantizada</h4>
-                <p>Tus productos llegaran a tu destino en menos de 30minutos.</p>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="info">
-                <div class="icon icon-success">
-                  <i class="material-icons">verified_user</i>
-                </div>
-                <h4 class="info-title">Privacidad</h4>
-                <p>Tu información esta protegida y segura con nosotros.</p>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="info">
-                <div class="icon icon-danger">
-                  <i class="material-icons">fingerprint</i>
-                </div>
-                <h4 class="info-title">Precios mas bajos</h4>
-                <p>Encontraran los mejores precios del mercado.</p>
-              </div>
-            </div>
+        
+
+
+      <div class="section">
+        <h2 class="title">Listado de Categoria de Productos</h2>
+        <div class="text-center">
+            <form class="form-inline" method="get" action="{{ url('/search') }}">
+              <input class="form-control" type="text" name="busqueda" placeholder="¿Buscar Producto?">
+              <button class="btn btn-info btn-just-icon" type="submit">
+                <i class="material-icons">search</i>
+              </button>
+
+            </form>
           </div>
-        </div>
-      </div>
 
-
-      <div class="section text-center">
-        <h2 class="title">Listado de Productos</h2>
-       
           <div class="row">
 
           
 
-            @foreach ($products as $product)
+            @foreach ($categories as $category)
               
               <div class="card col-md-4 mx-auto" >
              
                 <div class="card card-plain ">
-                  <div class="col-md-8 ml-auto mr-auto">
-                 <!-- {{ $product->images()->first() ? $product->images()->first()->image : ''  }}-->
-                   <img src="{{ $product->featured_image_url }}" alt="Thumbnail Image" class="img-raised rounded-circle img-fluid">
-
-                   <!-- $product->images()->first()->image  -->
-                  </div>
-                  <h4 class="card-title"> <a href="{{ url('/products/'.$product->id) }}">{{ $product->name }}</a> 
-                    <br>
-                    <small class="card-description text-muted">{{ $product->category ? $product->category->name : 'Generico'}}</small>
+                
+                  <h4 class="card-title"> <div class="text-center"><a href="{{ url('/categories/'.$category->id) }}">{{ $category->name }}</a></div> 
                   </h4>
                   <div class="card-body">
-                    <p class="card-description"> {{ $product->description }}
+                     <p>Contiene {{ $category->count() }} clase de productos</p><br>
+                    <p class="card-description"> {{ $category->description }} </p>
                   </div>
-                  <!--<div class="card-footer justify-content-center">
-                    <a href="#pablo" class="btn btn-link btn-just-icon"><i class="fa fa-twitter"></i></a>
-                    <a href="#pablo" class="btn btn-link btn-just-icon"><i class="fa fa-instagram"></i></a>
-                    <a href="#pablo" class="btn btn-link btn-just-icon"><i class="fa fa-facebook-square"></i></a>
-                  </div> -->
+               
                 </div>
               
               </div>
 
             @endforeach
 
-            <div class="text-center">
-                {{$products->links("pagination::bootstrap-4")}} 
-              </div>
+           
           </div>
 
 
