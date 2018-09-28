@@ -16,6 +16,8 @@ Route::post('/carrito', 'CarritoDetalleController@store');
 Route::delete('/carrito', 'CarritoDetalleController@destroy');
 
 Route::post('/order', 'CarritoController@update');
+Route::post('/order', 'CarritoController@status');
+Route::get('/order/{id}/delete', 'CarritoController@destroy');
 
 Route::get('/categories/{category}/','CategoryController@ver');
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Carrito;
 
 class HomeController extends Controller
 {
@@ -23,6 +24,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        //administrador
+        if (auth()->user()->id == 1) {
+            $ordenes =Carrito::orderBy('status', 'desc')->get();
+            return view('home')->with(compact('ordenes'));
+        }
+
+        //cliente
+        $id_user = auth()->user()->id;
+        $ordenes = Carrito::where('user_id', '=' , $id_user)->get();
+        return view('home')->with(compact('ordenes'));
     }
 }
